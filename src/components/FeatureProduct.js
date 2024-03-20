@@ -1,8 +1,8 @@
-import { useProductContext } from "../context/productcontext";
+import { useProductContext } from "../context/productcontex";
 import styled from "styled-components";
 import Product from "./Product";
 
-const FeaturProducts = () => {
+const FeatureProduct = () => {
   const { isLoading, featureProducts } = useProductContext();
 
   if (isLoading) {
@@ -124,4 +124,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default FeaturProducts;
+export default FeatureProduct;

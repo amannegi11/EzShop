@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components'
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import {CgMenu,CgClose} from "react-icons/cg"
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import { FiShoppingCart } from "react-icons/fi";
+import { CgMenu, CgClose } from "react-icons/cg";
+import { useCartContext } from "../context/cart_context";
+
 const Nav = () => {
-    const [menuIcon,setMenuIcon]=useState(false);
-    const Nav = styled.nav`
+  const [menuIcon, setMenuIcon] = useState();
+  const { total_item } = useCartContext();
+
+  const Nav = styled.nav`
     .navbar-lists {
       display: flex;
       gap: 4.8rem;
@@ -159,37 +163,66 @@ const Nav = () => {
     }
   `;
 
-    const datas = [{ path: "/", name: "Home" }, { path: "/about", name: "About" }, { path: "/products", name: "Products" }, { path: "/contact", name: "Contact" }]
-    return (
-        <Nav>
-            <div className={menuIcon ? "navbar active" :"navbar"}>
-                <ul className='navbar-lists'>
-                    {
-                        datas.map((data, index) => (
-                            <li key={index} onClick={()=>setMenuIcon(false)}>
-                                <NavLink to={data.path} className="navbar-link home-link">
-                                    {data.name}
-                                </NavLink>
-                            </li>
-                        ))
-                    }
-                    <li onClick={()=>setMenuIcon(false)}>
-                        <NavLink to={"/cart"} className="navbar-link cart-trolley--link">
-                           <AiOutlineShoppingCart className='cart-trolley'/>
-                            <span className='cart-total--item'>10</span>
-                        </NavLink>
-                    </li>
+  return (
+    <Nav>
+      <div className={menuIcon ? "navbar active" : "navbar"}>
+        <ul className="navbar-lists">
+          <li>
+            <NavLink
+              to="/"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/products"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/cart" className="navbar-link cart-trolley--link">
+              <FiShoppingCart className="cart-trolley" />
+              <span className="cart-total--item"> {total_item} </span>
+            </NavLink>
+          </li>
+        </ul>
 
-                </ul>
-                <div className="mobile-navbar-btn">
-                    <CgMenu name="menu-outline" className="mobile-nav-icon"
-                    onClick={()=>setMenuIcon(true)}/>
-                    <CgClose name="close-outline" className="mobile-nav-icon close-outline"
-                    onClick={()=>setMenuIcon(false)}/>
-                </div>    
-            </div>
-        </Nav>
-    )
-}
+        {/* two button for open and close of menu */}
+        <div className="mobile-navbar-btn">
+          <CgMenu
+            name="menu-outline"
+            className="mobile-nav-icon"
+            onClick={() => setMenuIcon(true)}
+          />
+          <CgClose
+            name="close-outline"
+            className="mobile-nav-icon close-outline"
+            onClick={() => setMenuIcon(false)}
+          />
+        </div>
+      </div>
+    </Nav>
+  );
+};
 
-export default Nav
+export default Nav;

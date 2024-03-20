@@ -1,19 +1,21 @@
-import React from 'react'
-import HeroSection from './components/HeroSection'
-import Trusted from './components/Trusted'
-import Services from './components/Services'
-import FeaturProducts from './components/FeaturProducts'
+import FeatureProduct from "./components/FeatureProduct";
+import HeroSection from "./components/HeroSection";
+import Services from "./components/Services";
+import Trusted from "./components/Trusted";
+
 const Home = () => {
+  const data = {
+    name: "Ez Shop",
+  };
 
   return (
     <>
-      <HeroSection myData="Ez Shop"/>
-      <FeaturProducts/>
-      <Services/>
-      <Trusted/>
+      <HeroSection myData={data} />
+      <FeatureProduct />
+      <Services />
+      <Trusted />
     </>
-  )
-}
+  );
+};
 
-
-export default Home
+export default Home;
